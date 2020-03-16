@@ -10,3 +10,6 @@ local.cfg
 # IDE Specic
 .idea/
 .vscode/
+
+# Mac
+.DS_STORE
