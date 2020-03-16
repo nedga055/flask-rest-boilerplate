@@ -19,3 +19,41 @@ python generate_secrets.py
 *TODO: Could set up a bootstrap script that will automatically do the entire bootstrapping process via one command.*
 
 ## Conda Environment
+
+To initialize the conda environment, run the following in the root project directory:
+
+```
+conda env create -f environment.yml --prefix ./api_env
+```
+
+Note the `--prefix ./api_env`. This creates the environment in the project directory in a folder called `api_env`.
+
+This will result in a long prefix in your command prompt. To address this, run the following:
+
+```
+conda config --set env_prompt '({name})'
+```
+
+To activate the environment:
+
+```
+conda activate ./api_env
+```
+
+Deactivate:
+
+```
+conda deactivate
+```
+
+If you add any new packages via conda or pip, make sure to update the `environment.yml`:
+
+```
+conda env export > environment.yml
+```
+
+To ensure you have all the dependencies defined in the `environment.yml`, run:
+
+```
+conda env update -p ./api_env --file environment.yml
+```
