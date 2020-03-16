@@ -1,7 +1,5 @@
-from flask_script import Manager
-
 from app import blueprint
-from app.main import create_app
+from app.main import create_app, create_manager
 
 # Create the app
 app = create_app()
@@ -10,7 +8,7 @@ app.register_blueprint(blueprint)
 app.app_context().push()
 
 # Set up the manager
-manager = Manager(app)
+manager = create_manager(app)
 
 
 @manager.command
@@ -19,6 +17,7 @@ def run():
 
 
 # TODO: Set up testing command
+
 
 if __name__ == '__main__':
     manager.run()
