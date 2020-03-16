@@ -4,6 +4,10 @@ from bson.errors import InvalidId
 from ..models.client import Client
 
 
+def get_all_clients():
+    return Client.objects().all()
+
+
 def get_client(client_id):
     try:
         client = Client.objects(id=ObjectId(client_id)).first()
