@@ -1,6 +1,10 @@
 from flask_restx import Api
 from flask import Blueprint
 
+# Import namespace definitions
+from .main.controllers.auth import api as auth_ns
+from .main.controllers.client import api as client_ns
+
 blueprint = Blueprint('api/v1', __name__)
 
 api = Api(blueprint,
@@ -17,4 +21,6 @@ api = Api(blueprint,
               }
           })
 
-# TODO: Add namespaces
+# Add namespaces
+api.add_namespace(auth_ns)
+api.add_namespace(client_ns, path='/api/v1/client')
