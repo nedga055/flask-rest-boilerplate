@@ -14,20 +14,10 @@ class AuthDto:
     })
 
 
-class FormDto:
-    api = Namespace('form', description="Form related operations")
-    form = api.model('form', {
-        "form_id": fields.String(required=True, description="The ID for the form"),
-        "form_name": fields.String(required=True, description="The name of the form"),
-        "pages": fields.Raw(required=True, description="The list of form pages"),
-        "validation_state": fields.Integer(required=True, description="The form validation state"),
-        "client_id": fields.String(description="The ID of the client who owns the form"),
-    })
-    filled_form = api.model('filled_form', {
-        "file_id": fields.String(required=True, description="The ID for the file"),
-        "form_id": fields.String(required=True, description="The ID for the form"),
-        "filepage_to_formpage": fields.Raw(required=True, description="Mapping of filled form page to empty form page"),
-        "pages": fields.Raw(required=True, description="The list of form pages"),
-        "validation_state": fields.Integer(required=True, description="The form validation state"),
-        "client_id": fields.String(description="The ID of the client who owns the form"),
+class ClientDto:
+    api = Namespace('client', description="Client related operations")
+    client = api.model('client', {
+        'id': fields.String(required=True, description="The Client ID"),
+        'name': fields.String(required=True, description="The Client name"),
+        'secret': fields.String(required=True, description="The Client Secret"),
     })
