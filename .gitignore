@@ -1,0 +1,12 @@
+# Virtual environments
+api_env/
+
+# Python specific
+__pycache__
+
+# Example configuration
+local.cfg
+
+# IDE Specic
+.idea/
+.vscode/
