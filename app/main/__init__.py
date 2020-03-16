@@ -1,8 +1,11 @@
 from flask import Flask
+from flask_script import Manager
 from mongoengine import connect
 from flask_jwt_extended import JWTManager
 
 from .config import FlaskConfig, DatabaseConfig
+
+from app.main.commands.client import CreateNewClient
 
 
 def create_app():
@@ -21,3 +24,11 @@ def create_app():
     # Initialize JWT authorization
     JWTManager(app)
     return app
+
+
+def create_manager(app):
+    # Set up the manager
+    manager = Manager(app)
+    # Add CLI commands
+    manager.add_command('createnewclient', CreateNewClient())
+    return manager
