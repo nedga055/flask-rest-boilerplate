@@ -9,3 +9,5 @@ class FlaskConfig:
     SERVER_NAME = "{}:{}".format(config.get('flask', 'host'), config.get('flask', 'port'))
     SECRET_KEY = config.get('flask', 'secret_key')
     DEBUG = config.get('flask', 'debug')
+    JWT_SECRET_KEY = config.get('jwt', 'secret_key')
+    JWT_ACCESS_TOKEN_EXPIRES = config.get('jwt', 'access_token_expires')
