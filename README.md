@@ -150,3 +150,9 @@ client = Client.objects(id=client_id).first()
 
 Refer to the [mongoengine documentation](https://mongoengine-odm.readthedocs.io/) for any additional details.
 
+### Services
+
+Services are static methods, or a collection of static methods via a class, that are intended to implement application functionality. They are to live within the `app.main.services` package.
+
+More often they are used to access and process data to and from the database, such as the `client_service`, but sometimes can also be used for generic functionality, such as retrieving the currently authenticated client.
+
