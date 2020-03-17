@@ -156,3 +156,9 @@ Services are static methods, or a collection of static methods via a class, that
 
 More often they are used to access and process data to and from the database, such as the `client_service`, but sometimes can also be used for generic functionality, such as retrieving the currently authenticated client.
 
+### Utilities
+
+The `app.main.utilities` packages is intended to be used for any utility functionality such as Date utility functions (if it weren't already baked into python).
+
+Initially, it includes the definition of data transfer objects (DTOs) that define the namespaces and models that make up the Rest API. 
+
