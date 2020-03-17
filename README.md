@@ -173,3 +173,5 @@ To authenticate, a user will need to retrieve an `access_token` via an `/authori
 The user will then provide the `access_token` via the `Authorization` header, prefixed the by the key term `Bearer`, when making any API requests that require authentication.
 
 Endpoints are deemed to require authentication by adding the `@jwt_required` decorator to individual resource methods.
+
+Because [JWT Tokens](https://jwt.io/) are being used for authentication, you can store any data you want to be accessibly via authenticated routes by specifying it via the `identity` argument when creating an access token during authentication.
