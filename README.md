@@ -103,3 +103,24 @@ For more information on how commands are created and managed, check out the flas
 
 Registering new commands is done in the `app.main` packages `__init__.py` within the `create_manager` function.
 
+### Controllers (API Routes)
+
+Controllers are what manage the REST API routes, or what can sometimes be referred to as resources.
+
+Every resource conforms to the CRUD methodology (Create, Read, Update, Delete) and therefore support the following functions:
+
+    - get (read)
+    - post (create)
+    - put (update)
+    - delete (delete)
+    
+To facilitate the development of proper REST conventions, we are using [flask-restx](https://flask-restx.readthedocs.io/en/latest/) which is a wrapper around [flask-restful](https://flask-restful.readthedocs.io/en/latest/).
+
+The purpose of [flask-restx](https://flask-restx.readthedocs.io/en/latest/) is to provide additional decorators that are used to automatically generate [Swagger](https://swagger.io/) documentation which will be available via the root URL of the application (locally, this will be http://127.0.0.1:5000).
+
+Each `app.main.controller` package contains multiple resources that will make up an API namespace.
+
+API namespaces are defined via DTOs (Data Transfer Objects) within the `app.main.utils.dto` package, accessible via the controller and registered in the `app` package in the `__init__.py` file.
+
+Models that define the different data maintained by an individual namespace are also defined via the DTOs.
+
