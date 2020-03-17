@@ -58,6 +58,22 @@ To ensure you have all the dependencies defined in the `environment.yml`, run:
 conda env update -p ./api_env --file environment.yml
 ```
 
+## Running the Application
+
+The application and available commands are run via the `manage.py` file located in the root of the project.
+
+To see what commands are available:
+
+```
+python manage.py
+```
+
+To run the application:
+
+```
+python manage.py run
+```
+
 ## Application Configuration
 
 Application configuration is managed via `.cfg` files located in the `app.main.config` package.
