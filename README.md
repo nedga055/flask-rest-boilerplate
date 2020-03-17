@@ -81,3 +81,15 @@ See python documentation on [ConfigParser](https://docs.python.org/3/library/con
 
 If additional configuration needs to be added, either update existing config classes in the config package's `__init__.py`, or add a new class.
 
+## Development
+
+Development of an application based off of the flask_rest_boilerplate should fall into one of the following categories:
+
+    - CLI Commands
+    - Controllers (API Routes)
+    - Database models
+    - Services
+    - Utilities
+    
+When adding new code, it is advisable to build within one of these sections, though it isn't required and this can be extended as desired. 
+
