@@ -57,3 +57,27 @@ To ensure you have all the dependencies defined in the `environment.yml`, run:
 ```
 conda env update -p ./api_env --file environment.yml
 ```
+
+## Application Configuration
+
+Application configuration is managed via `.cfg` files located in the `app.main.config` package.
+
+Defaults are stored in the `defaults.cfg` file, while local overrides can be done via a `local.cfg` file. Don't include one at all if you simply want to use the defaults.
+
+Configuration files are broken up into sections, each of which contains keys with values. Here's an example:
+
+```.ini
+[database]
+host = 127.0.0.1
+port = 27017
+name = db_name
+user = db_user
+passw = db_pass
+``` 
+
+In this example, `[database]` is the section, while the lines below are keys and their values available as part of the database section. It's important to note that all values are automatically considered to be a string. So when processing them to be used, make sure to convert them to the proper type as necessary.
+
+See python documentation on [ConfigParser](https://docs.python.org/3/library/configparser.html) for more details. **Note:** `.ini` files can be used in place of `.cfg` files. They are interchangeable.
+
+If additional configuration needs to be added, either update existing config classes in the config package's `__init__.py`, or add a new class.
+
