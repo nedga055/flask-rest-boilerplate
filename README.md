@@ -162,3 +162,14 @@ The `app.main.utilities` packages is intended to be used for any utility functio
 
 Initially, it includes the definition of data transfer objects (DTOs) that define the namespaces and models that make up the Rest API. 
 
+## Authentication
+
+API authentication is imperative to help ensure the security of client/user data in any application. 
+
+To this end, we are using the [flask_jwt_extended](https://flask-jwt-extended.readthedocs.io/en/stable/) package to automatically manage endpoint authentication.
+
+To authenticate, a user will need to retrieve an `access_token` via an `/authorize` endpoint. This endpoint, or any like it, will request user/client credentials and return an `access_token` on successful authentication.
+
+The user will then provide the `access_token` via the `Authorization` header, prefixed the by the key term `Bearer`, when making any API requests that require authentication.
+
+Endpoints are deemed to require authentication by adding the `@jwt_required` decorator to individual resource methods.
