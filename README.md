@@ -124,3 +124,29 @@ API namespaces are defined via DTOs (Data Transfer Objects) within the `app.main
 
 Models that define the different data maintained by an individual namespace are also defined via the DTOs.
 
+### Database Models
+
+For now, this boilerplate only supports the use of [MongoDB](https://www.mongodb.com/) via [mongoengine](http://mongoengine.org/) which is a Document-Object Mapper (like an ORM for MYSQL databases) for working with MongoDB in Python.
+
+New document models are added in the `app.main.models` package.
+
+The benefit of using a Document-Object Mapper is it provides an abstraction layer over top of your NoSQL database of choice with built in save/delete functionality as well as persistent object store with query and filtering capabilities.
+
+For example, if you have an instance of the `Client` document model, you automatically have access all documents stored in the `client` container. They can be retrieved by calling:
+
+```python
+from app.main.models.client import Client
+all_clients = Client.objects().all()
+```
+
+Alternatively, you can access a single client by client_id:
+
+```python
+from bson.objectid import ObjectId
+from app.main.models.client import Client
+client_id = ObjectId("5e6fc3128611120971f673f2")
+client = Client.objects(id=client_id).first()
+```
+
+Refer to the [mongoengine documentation](https://mongoengine-odm.readthedocs.io/) for any additional details.
+
