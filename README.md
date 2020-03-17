@@ -93,3 +93,13 @@ Development of an application based off of the flask_rest_boilerplate should fal
     
 When adding new code, it is advisable to build within one of these sections, though it isn't required and this can be extended as desired. 
 
+### CLI Commands
+
+CLI commands are any tasks/functions that are intended to be run via the command line. For example, a command line tool for creating new clients.
+
+They are managed via the `app.main.commands` package.
+
+For more information on how commands are created and managed, check out the flask-script documentation on [creating and running commands](https://flask-script.readthedocs.io/en/latest/#creating-and-running-commands).
+
+Registering new commands is done in the `app.main` packages `__init__.py` within the `create_manager` function.
+
