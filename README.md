@@ -1,10 +1,6 @@
-# CDO Data Science Team Rest API Boilerplate
+# Flask Rest API Boilerplate
 
-This repository is intended to act as a boilerplate for all CDO Data Science Team Python Rest APIs.
-
-*TODO: Add note on how to bootstrap a Rest API project using custom CLI tool* 
-
-**NOTE:** At this point, this project is intended to be fluid and up for discussion. The choices surrounding methodologies and technologies are not set in stone but are some initial recommendations. Feel free to open issues and add direct comments to code blocks.
+A boilerplate for Python Flask Rest APIs.
 
 ## Bootstrap
 
