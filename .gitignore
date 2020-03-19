@@ -4,7 +4,7 @@ api_env/
 # Python specific
 __pycache__
 
-# Example configuration
+# Local configuration
 local.cfg
 
 # IDE Specic
