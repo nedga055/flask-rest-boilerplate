@@ -2,19 +2,25 @@
 
 A boilerplate for Python Flask Rest APIs.
 
-## Bootstrap
+## Application initialization
 
-Create a copy of `app/main/config/example.local.cfg`, change the name to `app/main/config/local.cfg` and update configuration variables as desired.
-
-Run the following on the command line to generate application secrets:
+To initialize the application, run:
 
 ```
-python generate_secrets.py
+./app.sh -i
 ```
 
-*TODO: Could set up a bootstrap script that will automatically do the entire bootstrapping process via one command.*
+This will create your `local.cfg` and creates then conda environment.
 
-## Conda Environment
+## Generate application secrets
+
+To generate values for the App and JWT secret keys in your `local.cfg`:
+
+```
+./app.sh -s
+```
+
+## Conda environment
 
 To initialize the conda environment, run the following in the root project directory:
 
@@ -22,9 +28,11 @@ To initialize the conda environment, run the following in the root project direc
 conda env create -f environment.yml --prefix ./api_env
 ```
 
-Note the `--prefix ./api_env`. This creates the environment in the project directory in a folder called `api_env`.
+This runs as part of the application initialization, so you should not need to run this manually.
 
-This will result in a long prefix in your command prompt. To address this, run the following:
+However, note the `--prefix ./api_env`. This creates the environment in the project directory in a folder called `api_env`.
+
+This will result in a long prefix in your command prompt. To address this, if you haven't already, run the following:
 
 ```
 conda config --set env_prompt '({name})'
@@ -45,13 +53,13 @@ conda deactivate
 If you add any new packages via conda or pip, make sure to update the `environment.yml`:
 
 ```
-conda env export > environment.yml
+./app.sh -e
 ```
 
 To ensure you have all the dependencies defined in the `environment.yml`, run:
 
 ```
-conda env update -p ./api_env --file environment.yml
+./app.sh -u
 ```
 
 ## Running the Application

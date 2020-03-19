@@ -6,9 +6,10 @@ usage() {
   echo -n "./app.sh [OPTION]...
 
  Options:
-  -i, --init        Initialize the application
-  -u, --update      Update the conda environment
   -e, --export      Export the conda environment
+  -i, --init        Initialize the application
+  -s, --secrets     Generate application secrets
+  -u, --update      Update the conda environment
   -h, --help        Display this help and exit
 "
 }
@@ -39,6 +40,9 @@ if [ $# -gt 0 ]; then
       -e | --export )
         echo "Exporting conda environment"
         conda env export > environment.yml
+        ;;
+      -s | --secrets )
+        python generate_secrets.py
         ;;
       -h | --help )
         usage
