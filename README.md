@@ -62,6 +62,12 @@ To ensure you have all the dependencies defined in the `environment.yml`, run:
 ./app.sh -u
 ```
 
+To run the test suite defined in the ```tests/``` folder, run:
+
+```
+./app.sh -t
+```
+
 ## Running the Application
 
 The application and available commands are run via the `manage.py` file located in the root of the project.
@@ -144,6 +150,59 @@ API namespaces are defined via DTOs (Data Transfer Objects) within the `app.main
 
 Models that define the different data maintained by an individual namespace are also defined via the DTOs.
 
+## Data Source Controller
+>TODO: finish this section
+
+The application configuration specifies a class called ```DataSources``` which contains several static properties specifying connections to different data sources. The data sources currently supported are:
+1. Databases
+
+Future support could include external APIs, blob storage, etc.
+> TODO: it might make sense to support filesystem data by default to support, for example, connections to sqlite databases used in dev.
+### Databases
+
+This boilerplate supports connections to multiple databases. Under the ```[datasources]``` section of ```defaults.cfg```, the variable ```supported_databases``` specifies a list of database connections that the API will support. Below is the default specification.
+
+```ini
+[datasources]
+;Databases Supported.
+;Defines the names of all databases that the config should look for.
+supported_databases = mongo
+                      sql
+```
+
+In the ```[database]``` section of ```defaults.cfg```, the host, port, name, username, and password are specified (in that order). For example, if a user wants to support connection to a mongodb database and a postgreSQL database, the configuration could look as follows:
+
+```ini
+[database]
+;Expects (host, port, name, user, pass) in that order
+
+;Mongo connection
+mongo = 127.0.0.1
+        27017
+        flask_mongo
+        user
+        changeMe
+
+;SQL connection
+sql = 127.0.0.1
+      5432
+      flask_sql
+      user
+      changeMe
+```
+
+These values can be accessed through the ```DataSources``` class. For example:
+
+```python
+from .config import FlaskConfig, DataSourcesConfig
+# ...
+    connect(
+        db=DataSourcesConfig.DATABASES["mongo"].NAME,
+        # ...
+    )
+# ...
+```
+
 ### Database Models
 
 For now, this boilerplate only supports the use of [MongoDB](https://www.mongodb.com/) via [mongoengine](http://mongoengine.org/) which is a Document-Object Mapper (like an ORM for MYSQL databases) for working with MongoDB in Python.
@@ -195,3 +254,16 @@ The user will then provide the `access_token` via the `Authorization` header, pr
 Endpoints are deemed to require authentication by adding the `@jwt_required` decorator to individual resource methods.
 
 Because [JWT Tokens](https://jwt.io/) are being used for authentication, you can store any data you want to be accessibly via authenticated routes by specifying it via the `identity` argument when creating an access token during authentication.
+
+## Tests
+Tests are designed to be run from the root of this directory. Run ```./app.sh -t``` or ```./app.sh --test``` to run the test suite.
+
+Tests are written using Python's ```unittest``` framework and initially divided into unit, integration, and system tests. The intention of each folder is as follows:
+
+- __unit__ tests are designed to test individual components that do not have any external dependencies (e.g. testing a [pure function](https://en.wikipedia.org/wiki/Pure_function)).
+- __integration__ tests are designed to test the integration between two (or few) components. For example, if one function returns a value that is used by another function, an integration test might ensure that the second function correctly recieves and handles the data from the first function.
+- __system__ tests represent the highest level of test complexity, where higher level components of a system are tested. For example, using Flask's ```app_context``` and ```test_client``` to handle a fake request to a specific API endpoint would constitute a system test (for more information on the utilities Flask provides for creating testing context, see Flask's [testing documentation](https://flask.palletsprojects.com/en/1.1.x/testing/)).
+
+While the ```tests/``` folder is initialized with the above structure, this framework is not opinionated on how tests are organized. ```unittest``` will discover tests in the ```tests/``` folder regardless of how they're structured (but see caveat below).
+
+__Note:__ in order for ```unittest``` to recursively discover nested folders, they must be importable. Therefore, every nested folder that contains ```unittest``` tests should also include an ```__init__.py``` file.
