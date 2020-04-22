@@ -1,6 +1,9 @@
 # Virtual environments
 api_env/
 
+# Sqlite database files
+*.db
+
 # Python specific
 __pycache__
 

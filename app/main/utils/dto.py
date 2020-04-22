@@ -21,3 +21,13 @@ class ClientDto:
         'name': fields.String(required=True, description="The Client name"),
         'secret': fields.String(required=True, description="The Client Secret"),
     })
+
+
+class EmployeeDto:
+    api = Namespace('employee', description="Employee related operations")
+    employee = api.model('employee', {
+        'ID': fields.Integer(required=True, primary_key=True, description="Identifies an employee; primary key of employees table"),
+        'FirstName': fields.String(required=True, description="The employee's first name"),
+        'LastName': fields.String(required=True, description="The employee's last name"),
+        'Email': fields.String(required=True, description="The employee's email"),
+    })

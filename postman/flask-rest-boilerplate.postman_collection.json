@@ -1,0 +1,23 @@
+{
+	"info": {
+		"_postman_id": "8415850e-d6e1-4703-b4c1-4c1959ae7aa2",
+		"name": "flask-rest-boilerplate",
+		"description": "A simple postman collection to test endpoints in the flask-rest-boilerplate api.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/v1/employees/",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Tests the employees endpoint."
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

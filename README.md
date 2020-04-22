@@ -150,62 +150,17 @@ API namespaces are defined via DTOs (Data Transfer Objects) within the `app.main
 
 Models that define the different data maintained by an individual namespace are also defined via the DTOs.
 
-## Data Source Controller
->TODO: finish this section
+## Databases
 
-The application configuration specifies a class called ```DataSources``` which contains several static properties specifying connections to different data sources. The data sources currently supported are:
-1. Databases
-
-Future support could include external APIs, blob storage, etc.
-> TODO: it might make sense to support filesystem data by default to support, for example, connections to sqlite databases used in dev.
-### Databases
-
-This boilerplate supports connections to multiple databases. Under the ```[datasources]``` section of ```defaults.cfg```, the variable ```supported_databases``` specifies a list of database connections that the API will support. Below is the default specification.
-
-```ini
-[datasources]
-;Databases Supported.
-;Defines the names of all databases that the config should look for.
-supported_databases = mongo
-                      sql
-```
-
-In the ```[database]``` section of ```defaults.cfg```, the host, port, name, username, and password are specified (in that order). For example, if a user wants to support connection to a mongodb database and a postgreSQL database, the configuration could look as follows:
-
-```ini
-[database]
-;Expects (host, port, name, user, pass) in that order
-
-;Mongo connection
-mongo = 127.0.0.1
-        27017
-        flask_mongo
-        user
-        changeMe
-
-;SQL connection
-sql = 127.0.0.1
-      5432
-      flask_sql
-      user
-      changeMe
-```
-
-These values can be accessed through the ```DataSources``` class. For example:
-
-```python
-from .config import FlaskConfig, DataSourcesConfig
-# ...
-    connect(
-        db=DataSourcesConfig.DATABASES["mongo"].NAME,
-        # ...
-    )
-# ...
-```
+By default, this boilerplate supports connection to a single database. 
 
 ### Database Models
 
-For now, this boilerplate only supports the use of [MongoDB](https://www.mongodb.com/) via [mongoengine](http://mongoengine.org/) which is a Document-Object Mapper (like an ORM for MYSQL databases) for working with MongoDB in Python.
+This boilerplate supports the use of [MongoDB](https://www.mongodb.com/) via [mongoengine](http://mongoengine.org/) as well as any of the sql databases supported by [SQLAlchemy](https://www.sqlalchemy.org/).
+
+mongoengine is a Document-Object Mapper (like an Object-Relational Mapper for a SQL databases) for working with MongoDB in Python.
+
+
 
 New document models are added in the `app.main.models` package.
 
@@ -267,3 +222,10 @@ Tests are written using Python's ```unittest``` framework and initially divided 
 While the ```tests/``` folder is initialized with the above structure, this framework is not opinionated on how tests are organized. ```unittest``` will discover tests in the ```tests/``` folder regardless of how they're structured (but see caveat below).
 
 __Note:__ in order for ```unittest``` to recursively discover nested folders, they must be importable. Therefore, every nested folder that contains ```unittest``` tests should also include an ```__init__.py``` file.
+
+## Postman Tests
+In addition to ```unittest```, this boilerplate is set up with a simple postman collection. [Postman](https://www.postman.com/) is an open source application used primarily for API testing. Using postman, it is possible to write live tests for your API as you develop. The sections below briefly cover how to set up a postman test collection, and make use of environment variables.
+
+>TODO: quick instructions to get up + running with postman
+
+>TODO: quick instructions on how to use postman environment

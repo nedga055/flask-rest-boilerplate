@@ -4,6 +4,7 @@ from flask import Blueprint
 # Import namespace definitions
 from .main.controllers.auth import api as auth_ns
 from .main.controllers.client import api as client_ns
+from .main.controllers.employee import api as employee_ns
 
 blueprint = Blueprint('api/v1', __name__)
 
@@ -24,3 +25,4 @@ api = Api(blueprint,
 # Add namespaces
 api.add_namespace(auth_ns)
 api.add_namespace(client_ns, path='/api/v1/client')
+api.add_namespace(employee_ns, path="/api/v1/employees")
