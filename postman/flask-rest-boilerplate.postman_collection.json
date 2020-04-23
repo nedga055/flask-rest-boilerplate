@@ -17,6 +17,47 @@
 				"description": "Tests the employees endpoint."
 			},
 			"response": []
+		},
+		{
+			"name": "/api/v1/employees/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"FirstName\": \"John\",\n\t\"LastName\": \"Doe\",\n\t\"Email\": \"john.doe@canada.ca\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/api/v1/employees",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"employees"
+					]
+				},
+				"description": "A post request to add a new employee."
+			},
+			"response": []
+		},
+		{
+			"name": "/api/v1/employees/<employee_id>",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": ""
+				},
+				"description": "Gets a specific employee"
+			},
+			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}

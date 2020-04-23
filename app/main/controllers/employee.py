@@ -15,7 +15,7 @@ _employee = EmployeeDto.employee
 
 @api.route("",
            doc={
-               "description": "Retreive a list of employees."
+               "description": "Retreive a list of employees.",
            })
 class Employees(Resource):
     def get(self):
