@@ -11,10 +11,10 @@ class Employee(db.Model):
     LastName = db.Column(db.String(), nullable=False,)
     Email = db.Column(db.String(), nullable=False,)
 
-    def __init__(self, first_name, last_name, email):
-        self.FirstName = first_name
-        self.LastName = last_name
-        self.Email = email
+    def __init__(self, FirstName, LastName, Email):
+        self.FirstName = FirstName
+        self.LastName = LastName
+        self.Email = Email
 
     def json(self):
         ''' Creates a JSON representation of the current instance of User. '''

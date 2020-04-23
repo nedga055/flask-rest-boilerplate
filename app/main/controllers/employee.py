@@ -2,9 +2,10 @@ from flask import request
 from flask_restx import Resource
 
 from ..utils.dto import EmployeeDto
-from ..services.employee_service import get_user_by_id, get_all_employees
+from ..services.employee_service import (get_employee_by_id,
+                                         get_all_employees)
 
-from ..models.employee import Employee
+from ..models.employee import Employee as EmployeeModel
 
 api = EmployeeDto.api
 _employee = EmployeeDto.employee
@@ -18,7 +19,16 @@ _employee = EmployeeDto.employee
            })
 class Employees(Resource):
     def get(self):
-        return "test"
+        return list(get_all_employees())
+
+    def post(self):
+        # Get request body
+        post_data = request.json
+        # Create a new instance of Employee model
+        new_employee = EmployeeModel(**post_data)
+        # Save employee to database
+        new_employee.save_to_db()
+        return new_employee.json(), 201
 
 
 @api.route("/<employee_id>",
@@ -28,11 +38,6 @@ class Employees(Resource):
 @api.param('employee_id', 'The ID of the employee in the employees table')
 class Employee(Resource):
     def get(self, employee_id):
-        return "employee id is " + str(employee_id)
+        return get_employee_by_id(employee_id).json()
 
-    def post(self):
-        # Get request body
-        post_data = request.json
-        # Create a new instance of Employee model
-        new_employee = Employee(**post_data)
-        print("employee is ", new_employee)
+    

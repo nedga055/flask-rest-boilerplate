@@ -1,6 +1,6 @@
 from ..models.employee import Employee
 
-def get_user_by_id(user_id):
+def get_employee_by_id(user_id):
     '''
     Retreives a particular user by their user ID.
 
@@ -11,7 +11,7 @@ def get_user_by_id(user_id):
     Returns:
         An instance of the User model.
     '''
-    return Employee.query.filter_by(BrowserID=browser_id).first()
+    return Employee.query.filter_by(ID=user_id).first()
 
 def get_all_employees():
     ''' Gets all users in the users table. '''

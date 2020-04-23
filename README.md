@@ -152,7 +152,7 @@ Models that define the different data maintained by an individual namespace are 
 
 ## Databases
 
-By default, this boilerplate supports connection to a single database. 
+By default, this boilerplate supports connection to a single database, although users can add multiple database connections if they choose to do so. SQLAlchemy supports multiple database connections with its [binds](https://flask-sqlalchemy.palletsprojects.com/en/2.x/binds/) feature, while mongoengine supports multiple connections through aliasing (example [here](https://blog.sneawo.com/blog/2017/04/11/how-to-use-multiple-databases-with-flask-mongoengine/)).
 
 ### Database Models
 
