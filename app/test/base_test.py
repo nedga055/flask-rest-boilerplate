@@ -18,7 +18,7 @@ class BaseTest(TestCase):
         '''
         # Create a separate testing database that is different from the development database.
         if DatabaseConfig.DB_TYPE == "sql":
-            app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///test.db'
+            app.config["SQLALCHEMY_DATABASE_URI"] = 'sqlite:///../test/test.db'
         if DatabaseConfig.DB_TYPE == "mongo":
             raise NotImplementedError("Testing support for mongodb has not "
                                       "yet been implemented.")

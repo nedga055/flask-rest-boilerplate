@@ -9,18 +9,24 @@ from ..models.employee import Employee as EmployeeModel
 
 api = EmployeeDto.api
 _employee = EmployeeDto.employee
+_new_employee = EmployeeDto.new_employee
 
 # TODO: add argument parsing functionality. Note that Flasks's reqparse is depricated,
 # so should use marshmallow or similar instead.
 
 @api.route("",
            doc={
-               "description": "Retreive a list of employees.",
+               "description": "A resource to get all employees or to post an employee.",
            })
 class Employees(Resource):
+    @api.doc('List of employees')
+    @api.marshal_list_with(_employee)
     def get(self):
         return list(get_all_employees())
 
+    @api.doc('Add employee')
+    @api.expect(_new_employee, validate=True)
+    @api.marshal_with(_employee, code=201)
     def post(self):
         # Get request body
         post_data = request.json
@@ -35,9 +41,13 @@ class Employees(Resource):
            doc={
                "description": "Retreives an employee, given the employee's ID"
            })
-@api.param('employee_id', 'The ID of the employee in the employees table')
+@api.response(401, "Employee not found.")
 class Employee(Resource):
+    @api.doc(params={"employee_id": "The integer id assigned to the employee in the database."})
+    @api.marshal_with(_employee, 200)
     def get(self, employee_id):
-        return get_employee_by_id(employee_id).json()
+        if get_employee_by_id(employee_id):
+            return get_employee_by_id(employee_id).json()
+        return abort(401, "Employee not found.")
 
     

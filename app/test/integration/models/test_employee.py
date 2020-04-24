@@ -1,17 +1,17 @@
-from app.main.tests.base_test import BaseTest
+from app.test.base_test import BaseTest
 
 from app.main.services.employee_service import (get_employee_by_id, get_all_employees)
 from app.main.models.employee import Employee
 
 test_employee = Employee(
-            FirstName="John",
-            LastName="Doe",
-            Email="john.doe@canada.ca",)
+            first_name="John",
+            last_name="Doe",
+            email="john.doe@canada.ca",)
 
 expected_json = {
-            "FirstName": "John",
-            "LastName": "Doe",
-            "Email": "john.doe@canada.ca",}
+            "first_name": "John",
+            "last_name": "Doe",
+            "email": "john.doe@canada.ca",}
 
 class TestEmployeeModel(BaseTest):
     '''

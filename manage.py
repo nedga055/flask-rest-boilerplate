@@ -1,3 +1,5 @@
+import unittest
+
 from app import blueprint
 from app.main import create_app, create_manager
 
@@ -16,7 +18,14 @@ def run():
     app.run()
 
 
-# TODO: Set up testing command
+@manager.command
+def test():
+    ''' Runs the test suite in app/tests. '''
+    tests = unittest.TestLoader().discover('app/test/', pattern='test*.py')
+    result = unittest.TextTestRunner(verbosity=2).run(tests)
+    if result.wasSuccessful():
+        return 0
+    return 1
 
 
 if __name__ == '__main__':

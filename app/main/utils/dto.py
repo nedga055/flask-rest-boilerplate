@@ -26,8 +26,12 @@ class ClientDto:
 class EmployeeDto:
     api = Namespace('employee', description="Employee related operations")
     employee = api.model('employee', {
-        'ID': fields.Integer(required=True, primary_key=True, description="Identifies an employee; primary key of employees table"),
-        'FirstName': fields.String(required=True, description="The employee's first name"),
-        'LastName': fields.String(required=True, description="The employee's last name"),
-        'Email': fields.String(required=True, description="The employee's email"),
+        'first_name': fields.String(required=True, description="The employee's first name"),
+        'last_name': fields.String(required=True, description="The employee's last name"),
+        'email': fields.String(required=True, description="The employee's email"),
+    })
+    new_employee = api.model('new_employee', {
+        'first_name': fields.String(required=True, description="The employee's first name"),
+        'last_name': fields.String(required=True, description="The employee's last name"),
+        'email': fields.String(required=True, description="The employee's email"),
     })

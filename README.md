@@ -62,7 +62,7 @@ To ensure you have all the dependencies defined in the `environment.yml`, run:
 ./app.sh -u
 ```
 
-To run the test suite defined in the ```tests/``` folder, run:
+To run the test suite defined in the ```app/test/``` folder, run:
 
 ```
 ./app.sh -t
@@ -82,6 +82,12 @@ To run the application:
 
 ```
 python manage.py run
+```
+
+To run the test suite
+
+```
+python manage.py test
 ```
 
 ## Application Configuration
@@ -249,9 +255,11 @@ Tests are written using Python's ```unittest``` framework and initially divided 
 - __integration__ tests are designed to test the integration between two (or few) components. For example, if one function returns a value that is used by another function, an integration test might ensure that the second function correctly recieves and handles the data from the first function.
 - __system__ tests represent the highest level of test complexity, where higher level components of a system are tested. For example, using Flask's ```app_context``` and ```test_client``` to handle a fake request to a specific API endpoint would constitute a system test (for more information on the utilities Flask provides for creating testing context, see Flask's [testing documentation](https://flask.palletsprojects.com/en/1.1.x/testing/)).
 
-While the ```tests/``` folder is initialized with the above structure, this framework is not opinionated on how tests are organized. ```unittest``` will discover tests in the ```/tests``` folder regardless of how they're structured (but see caveat below).
+While the ```tests/``` folder is initialized with the above structure, this framework is not opinionated on how tests are organized. ```unittest``` will discover tests in the ```/tests``` folder regardless of how they're structured (but see caveats below).
 
-__Caveat:__ in order for ```unittest``` to recursively discover nested folders, they must be importable. Therefore, every nested folder that contains ```unittest``` tests should also include an ```__init__.py``` file.
+__Caveat #1:__ in order for ```unittest``` to recursively discover nested folders, they must be importable. Therefore, every nested folder that contains ```unittest``` tests should also include an ```__init__.py``` file.
+
+__Caveat #2:__ as outlined in the [docs](https://docs.python.org/2/library/unittest.html) the way that ```unittest```'s ```discover``` works is through pattern matching on file names (by default it searches for ```test*.py```). For consistency, we recommend following this convention and prefixing all ```unittest``` files with ```test_*.py```.
 
 Additionally, a ```BaseTest``` class is provided in the root of the ```tests/base_test.py```. Integration and system tests that require a database and/or application context to be setup (e.g. to make a fake request for testing purposes) extend ```BaseTest``` instead of ```TestCase```.
 
