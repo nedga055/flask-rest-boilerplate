@@ -9,7 +9,6 @@ from ..models.employee import Employee as EmployeeModel
 
 api = EmployeeDto.api
 _employee = EmployeeDto.employee
-_new_employee = EmployeeDto.new_employee
 
 # TODO: add argument parsing functionality. Note that Flasks's reqparse is depricated,
 # so should use marshmallow or similar instead.
@@ -25,7 +24,7 @@ class Employees(Resource):
         return list(get_all_employees())
 
     @api.doc("Add employee", description="Adds an employee(s) to the database.")
-    @api.expect(_new_employee, validate=True)
+    @api.expect(_employee, validate=True)
     @api.marshal_with(_employee, code=201)
     def post(self):
         # Get request body

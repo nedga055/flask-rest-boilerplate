@@ -30,8 +30,3 @@ class EmployeeDto:
         'last_name': fields.String(required=True, description="The employee's last name"),
         'email': fields.String(required=True, description="The employee's email"),
     })
-    new_employee = api.model('new_employee', {
-        'first_name': fields.String(required=True, description="The employee's first name"),
-        'last_name': fields.String(required=True, description="The employee's last name"),
-        'email': fields.String(required=True, description="The employee's email"),
-    })

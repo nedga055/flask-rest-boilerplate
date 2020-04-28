@@ -40,7 +40,7 @@ if [ $# -gt 0 ]; then
         ;;
       -t | --test )
         echo "Running test suite"
-        python -m unittest discover -s ./app/test/
+        python manage.py test
         ;;
       -e | --export )
         echo "Exporting conda environment"
