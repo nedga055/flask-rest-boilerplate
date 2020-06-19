@@ -10,6 +10,7 @@ usage() {
   -i, --init        Initialize the application
   -s, --secrets     Generate application secrets
   -u, --update      Update the conda environment
+  -r, --run         Run the Flask server
   -t, --test        Run test suite
   -h, --help        Display this help and exit
 "
@@ -37,6 +38,11 @@ if [ $# -gt 0 ]; then
       -u | --update )
         echo "Updating conda environment"
         conda env update -p "$PREFIX" --file environment.yml
+        ;;
+      -r | --run )
+        echo "Running the Flask server"
+        source activate $PREFIX
+        python manage.py run
         ;;
       -t | --test )
         echo "Running test suite"
