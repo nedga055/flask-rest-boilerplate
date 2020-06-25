@@ -6,47 +6,40 @@ usage() {
   echo -n "./app.sh [OPTION]...
 
  Options:
+  -d, --dev         Run in development mode
   -e, --export      Export the conda environment
   -i, --init        Initialize the application
-  -s, --secrets     Generate application secrets
-  -u, --update      Update the conda environment
   -r, --run         Run the Flask server
+  -s, --secrets     Generate application secrets
   -t, --test        Run test suite
+  -u, --update      Update the conda environment
   -h, --help        Display this help and exit
 "
 }
+
+DEV=false
+INIT=false
+RUN=false
+TEST=false
+UPDATE=false
 
 if [ $# -gt 0 ]; then
   while [ "$1" != "" ]; do
     case $1 in
       -i | --init )
-        echo "Initializing application"
-        # Create local config file if it doesn't already exist
-        EXAMPLE_FILE=./app/main/config/example.local.cfg
-        FILE=./app/main/config/local.cfg
-        if [ -f "$EXAMPLE_FILE" ] && [ ! -f "$FILE" ]; then
-          echo "Creating local configuration file."
-          cp "$EXAMPLE_FILE" "$FILE"
-        fi
-
-        # Create conda environment
-        if [ ! -d "$PREFIX" ]; then
-          echo "Creating conda environment"
-          conda env create -f environment.yml --prefix "$PREFIX"
-        fi
+        INIT=true
         ;;
       -u | --update )
-        echo "Updating conda environment"
-        conda env update -p "$PREFIX" --file environment.yml
+        UPDATE=true
+        ;;
+      -d | --dev )
+        DEV=true
         ;;
       -r | --run )
-        echo "Running the Flask server"
-        source activate $PREFIX
-        python manage.py run
+        RUN=true
         ;;
       -t | --test )
-        echo "Running test suite"
-        python manage.py test
+        TEST=true
         ;;
       -e | --export )
         echo "Exporting conda environment"
@@ -65,4 +58,46 @@ else
   echo "No arguments were provided.
   "
   usage
+fi
+
+# Initialize conda environment
+if [ "$INIT" = true ]; then
+  echo "Initializing application"
+  # Create local config file if it doesn't already exist
+  EXAMPLE_FILE=./app/main/config/example.local.cfg
+  FILE=./app/main/config/local.cfg
+  if [ -f "$EXAMPLE_FILE" ] && [ ! -f "$FILE" ]; then
+    echo "Creating local configuration file."
+    cp "$EXAMPLE_FILE" "$FILE"
+  fi
+
+  # Create conda environment
+  if [ ! -d "$PREFIX" ]; then
+    echo "Creating conda environment"
+    conda env create -f environment.yml --prefix "$PREFIX"
+  fi
+fi
+
+# Update the conda environment
+if [ "$UPDATE" = true ]; then
+  echo "Updating conda environment"
+  conda env update -p "$PREFIX" --file environment.yml
+fi
+
+# Run the application server, either in dev or production
+if [ "$DEV" = true ] || [ "$RUN" = true ]; then
+  source activate $PREFIX
+  if [ "$DEV" = true ]; then
+    echo "Running the development server"
+    python manage.py run_dev
+  elif [ "$RUN" = true ]; then
+    echo "Running the production server"
+    python manage.py run
+  fi
+fi
+
+# Run the test suite
+if [ "$TEST" = true ]; then
+  echo "Running test suite"
+  python manage.py test
 fi
