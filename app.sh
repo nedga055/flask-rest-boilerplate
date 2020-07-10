@@ -84,6 +84,12 @@ if [ "$UPDATE" = true ]; then
   conda env update -p "$PREFIX" --file environment.yml
 fi
 
+# Run the test suite
+if [ "$TEST" = true ]; then
+  echo "Running test suite"
+  python manage.py test
+fi
+
 # Run the application server, either in dev or production
 if [ "$DEV" = true ] || [ "$RUN" = true ]; then
   source activate $PREFIX
@@ -94,10 +100,4 @@ if [ "$DEV" = true ] || [ "$RUN" = true ]; then
     echo "Running the production server"
     python manage.py run
   fi
-fi
-
-# Run the test suite
-if [ "$TEST" = true ]; then
-  echo "Running test suite"
-  python manage.py test
 fi
