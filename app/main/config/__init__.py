@@ -6,6 +6,7 @@ config = ConfigParser()
 # Read in the default and local config files to populate our configuration
 files_read = config.read(['./app/main/config/defaults.cfg', './app/main/config/local.cfg'])
 
+
 class DatabaseConfig:
     DB_TYPE = config.get('database', 'type')
     DB_HOST = config.get('database', 'host')
@@ -17,9 +18,9 @@ class DatabaseConfig:
 
 
 class FlaskConfig:
-    SERVER_NAME = "{}:{}".format(config.get('flask', 'host'), config.get('flask', 'port'))
-    SECRET_KEY = config.get('flask', 'secret_key')
+    ENV = 'development' if config.get('flask', 'debug') else 'production'
     DEBUG = config.get('flask', 'debug')
+    SECRET_KEY = config.get('flask', 'secret_key')
     JWT_SECRET_KEY = config.get('jwt', 'secret_key')
     JWT_ACCESS_TOKEN_EXPIRES = int(config.get('jwt', 'access_token_expires'))
     # If a sql database is chosen, specify required flask-sqlalchemy configurations
@@ -27,3 +28,7 @@ class FlaskConfig:
         SQLALCHEMY_DATABASE_URI = assemble_sqlalchemy_url(DatabaseConfig)
         SQLALCHEMY_TRACK_MODIFICATIONS = False
 
+
+class ServerConfig:
+    HOST = config.get('server', 'host')
+    PORT = config.get('server', 'port')

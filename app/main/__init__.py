@@ -9,6 +9,7 @@ from app.main.commands.client import CreateNewClient
 
 from app.main.db import db
 
+
 def create_app():
     # Initialize flask app
     app = Flask(__name__)
@@ -26,10 +27,11 @@ def create_app():
     if DatabaseConfig.DB_TYPE == "sql":
         # Set up the SQLAlchemy connection
         db.init_app(app)
+
         @app.before_first_request
         def create_tables():
             db.create_all()
-    
+
     # Initialize JWT authorization
     JWTManager(app)
     return app

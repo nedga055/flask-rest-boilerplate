@@ -78,10 +78,16 @@ To see what commands are available:
 python manage.py
 ```
 
-To run the application:
+To run the production waitress server:
 
 ```
 python manage.py run
+```
+
+To run the development server:
+
+```
+python manage.py run_dev
 ```
 
 To run the test suite

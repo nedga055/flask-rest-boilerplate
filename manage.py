@@ -1,7 +1,9 @@
 import unittest
+from waitress import serve
 
 from app import blueprint
 from app.main import create_app, create_manager
+from app.main.config import ServerConfig
 
 # Create the app
 app = create_app()
@@ -15,7 +17,12 @@ manager = create_manager(app)
 
 @manager.command
 def run():
-    app.run()
+    serve(app=app, host=ServerConfig.HOST, port=ServerConfig.PORT)
+
+
+@manager.command
+def run_dev():
+    app.run(host=ServerConfig.HOST, port=ServerConfig.PORT)
 
 
 @manager.command
