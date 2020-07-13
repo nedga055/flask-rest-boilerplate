@@ -20,7 +20,7 @@ The following software and code artifacts are made available under the MIT Licen
 - [SQLAlchemy](https://docs.sqlalchemy.org/en/13/copyright.html) - Copyright (c) 2005-2020 Michael Bayer and contributors. SQLAlchemy is a trademark of Michael Bayer.
 - [Flask-JWT-Extended](https://flask-jwt-extended.readthedocs.io/en/stable/) - Copyright (c) 2016 Landon
 - [mongoengine](https://github.com/MongoEngine/mongoengine/blob/master/LICENSE) - Copyright (c) 2009 See AUTHORS
-
+- [CIUnitTest](https://pypi.org/project/CIUnitTest/) - Note that alterations to the original code have been made.
 
 
 

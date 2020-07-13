@@ -5,6 +5,9 @@ from app import blueprint
 from app.main import create_app, create_manager
 from app.main.config import ServerConfig
 
+from app.test.object_test_runner import ObjectTestRunner
+from app.test.report import Report
+
 # Create the app
 app = create_app()
 app.register_blueprint(blueprint)
