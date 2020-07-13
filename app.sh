@@ -6,14 +6,15 @@ usage() {
   echo -n "./app.sh [OPTION]...
 
  Options:
-  -d, --dev         Run in development mode
-  -e, --export      Export the conda environment
-  -i, --init        Initialize the application
-  -r, --run         Run the Flask server
-  -s, --secrets     Generate application secrets
-  -t, --test        Run test suite
-  -u, --update      Update the conda environment
-  -h, --help        Display this help and exit
+  -d, --dev             Run in development mode
+  -e, --export          Export the conda environment
+  -i, --init            Initialize the application
+  -r, --run             Run the Flask server
+  -s, --secrets         Generate application secrets
+  -t, --test            Run test suite
+  -u, --update          Update the conda environment
+  -h, --help            Display this help and exit
+  -vf, --versionfile    Produces version.json file
 "
 }
 
@@ -44,6 +45,10 @@ if [ $# -gt 0 ]; then
       -e | --export )
         echo "Exporting conda environment"
         conda env export > environment.yml
+        ;;
+      -vf | --versionfile )
+        echo "Creating version.json file"
+        ./helpers.build.version.sh
         ;;
       -s | --secrets )
         python generate_secrets.py
