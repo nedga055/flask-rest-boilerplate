@@ -48,7 +48,7 @@ if [ $# -gt 0 ]; then
         ;;
       -vf | --versionfile )
         echo "Creating version.json file"
-        ./helpers.build.version.sh
+        source ./helpers.build.version.sh
         ;;
       -s | --secrets )
         python generate_secrets.py
