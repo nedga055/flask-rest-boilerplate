@@ -1,5 +1,5 @@
-https://github.com/nedga055/flask-rest-boilerplate/workflows/Python%20Package%20using%20Conda/badge.svg
-https://img.shields.io/github/license/nedga055/flask-rest-boilerplate
+![test status](https://github.com/nedga055/flask-rest-boilerplate/workflows/Python%20Package%20using%20Conda/badge.svg)
+![license status](https://img.shields.io/github/license/nedga055/flask-rest-boilerplate)
 
 # Flask Rest API Boilerplate
 
