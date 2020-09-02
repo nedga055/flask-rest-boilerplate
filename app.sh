@@ -44,7 +44,8 @@ if [ $# -gt 0 ]; then
         ;;
       -e | --export )
         echo "Exporting conda environment"
-        conda env export > environment.yml
+        # --no-builds prevents OS-specific build specifications from dependencies
+        conda env export > environment.yml --no-builds
         ;;
       -vf | --versionfile )
         echo "Creating version.json file"
