@@ -2,7 +2,6 @@ import json
 
 from app.test.base_test import BaseTest
 
-from app.main.services.employee_service import (get_employee_by_id, get_all_employees)
 from app.main.models.employee import Employee
 
 # Request headers
@@ -14,7 +13,7 @@ content_header = {
 test_employee = {
     "first_name": "John",
     "last_name": "Doe",
-    "email": "john.doe@canada.ca",}
+    "email": "john.doe@canada.ca", }
 
 
 class EmployeeTest(BaseTest):
@@ -32,7 +31,7 @@ class EmployeeTest(BaseTest):
                                    headers=content_header,)
                 # Check that employee was created successfully
                 self.assertEqual(resp.status_code, 201)
-    
+
     def test_get_employees(self):
         ''' Use case: user wants to get a list of all employees. '''
         with self.app() as client:
@@ -47,7 +46,7 @@ class EmployeeTest(BaseTest):
                 # the /api/v1/employees endpoint returns a list, so get the (only)
                 # employee at index position 0.
                 self.assertEqual(json.loads(resp.data)[0], test_employee)
-    
+
     def test_get_employee(self):
         ''' Use case: user wants to get a specific employee by their database ID. '''
         with self.app() as client:

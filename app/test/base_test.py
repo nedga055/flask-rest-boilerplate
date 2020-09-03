@@ -6,6 +6,7 @@ from app.main.utils.database import assemble_sqlalchemy_url
 from manage import app
 from app.main.db import db
 
+
 class BaseTest(TestCase):
     '''
     A base test class with setup and teardown methods to create an
@@ -22,7 +23,7 @@ class BaseTest(TestCase):
         if DatabaseConfig.DB_TYPE == "mongo":
             raise NotImplementedError("Testing support for mongodb has not "
                                       "yet been implemented.")
-    
+
     @classmethod
     def tearDownClass(cls):
         '''
@@ -51,7 +52,7 @@ class BaseTest(TestCase):
         # client and the application context.
         self.app = app.test_client
         self.app_context = app.app_context
-    
+
     def tearDown(self):
         '''
         Clear database when each test is finished.

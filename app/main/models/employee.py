@@ -1,5 +1,6 @@
 from app.main.db import db
 
+
 class Employee(db.Model):
     '''
     A simple employee model for illustrative purposes.
@@ -23,7 +24,7 @@ class Employee(db.Model):
             'last_name': self.last_name,
             'email': self.email,
         }
-    
+
     def save_to_db(self):
         ''' Saves the instance of UserModel to the database. '''
         db.session.add(self)
@@ -33,4 +34,3 @@ class Employee(db.Model):
         ''' Saves the instance of UserModel to the database. '''
         db.session.delete(self)
         db.session.commit()
-
