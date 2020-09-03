@@ -1,11 +1,11 @@
-import unittest
+import sys
+
 from waitress import serve
 
 from app import blueprint
 from app.main import create_app, create_manager
 from app.main.config import ServerConfig
 
-from app.test.object_test_runner import ObjectTestRunner
 from app.test.report import Report
 
 # Create the app
@@ -31,11 +31,14 @@ def run_dev():
 @manager.command
 def test():
     ''' Runs the test suite in app/tests. '''
-    tests = unittest.TestLoader().discover('app/test/', pattern='test*.py')
-    result = unittest.TextTestRunner(verbosity=2).run(tests)
-    if result.wasSuccessful():
-        return 0
-    return 1
+    # Get the report created by ObjectTestRunner
+    report = Report()
+    report.generate_json_report()
+    report.generate_markdown_report()
+    if report.TESTS_PASSED:
+        sys.exit(0)
+    else:
+        sys.exit(1)
 
 
 if __name__ == '__main__':

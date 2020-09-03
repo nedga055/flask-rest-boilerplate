@@ -1,9 +1,13 @@
+import os
 import json
+import time
 import unittest
+from datetime import datetime
 
-from ...__version__ import __VERSION__, __GIT_COMMIT__
+from __version__ import __VERSION__, __GIT_COMMIT__
 
-from object_test_runner import ObjectTestRunner
+from app.test.object_test_runner import ObjectTestRunner
+
 
 class Report:
     '''
@@ -47,20 +51,30 @@ class Report:
             "report": ObjectTestRunner().run(tests)
         }
 
+        self.TESTS_PASSED = self.report["report"]["was_successful"]
+
     def generate_json_report(self):
         '''
         Outputs the report created by ObjectTestRunner as a JSON file in the
         reports directory.
         '''
-        filename = f"{self.reports_path}/test-report.json"
-        with open(filename) as f:
+        timestamp = int(time.time()*1000)
+        filename = f"{self.reports_path}/test-report-{timestamp}.json"
+        with open(filename, 'w') as f:
             json.dump(obj=self.report, fp=f, indent=4)
-        raise NotImplementedError
 
     def generate_markdown_report(self):
         '''
         Outputs the report created by ObjectTestRunner as a markdown document
         in the reports directory.
         '''
-        filename = f"{self.reports_path}/test-report.md"
-        raise NotImplementedError
+        timestamp = int(time.time()*1000)
+        filename = f"{self.reports_path}/test-report-{timestamp}.md"
+        # Adding formatting for markdown file
+        report_text = f"# Test report for {datetime.fromtimestamp(timestamp/1000)}\n"
+        report_text += "```json\n"
+        report_text += json.dumps(obj=self.report, indent=4)
+        report_text += "```\n"
+        # Dump markdown file
+        with open(filename, 'w') as f:
+            f.write(report_text)
