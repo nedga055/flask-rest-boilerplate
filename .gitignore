@@ -51,6 +51,8 @@ pip-delete-this-directory.txt
 .cache
 nosetests.xml
 coverage.xml
+reports
+reports/*
 
 # Translations
 *.mo
