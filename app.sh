@@ -42,6 +42,9 @@ if [ $# -gt 0 ]; then
       -t | --test )
         TEST=true
         ;;
+      -l | --lint )
+        LINT=true
+        ;;
       -e | --export )
         echo "Exporting conda environment"
         # --no-builds prevents OS-specific build specifications from dependencies
@@ -94,6 +97,12 @@ fi
 if [ "$TEST" = true ]; then
   echo "Running test suite"
   python manage.py test
+fi
+
+# Run the linter
+if [ "$LINT" = true ]; then
+  echo "Linting with Flake8"
+  flake8 app --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
 fi
 
 # Run the application server, either in dev or production
