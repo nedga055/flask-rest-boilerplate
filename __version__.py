@@ -12,7 +12,7 @@ __GIT_COMMIT__: The hash associated with the current commit.
 from os import path
 import json
 
-from app.main.errors import MissingVersionError
+from app.main.errors.api_errors import MissingVersionError
 
 # Import version JSON
 version_file = path.abspath(path.join(path.dirname(__file__), "version.json"))
