@@ -2,6 +2,7 @@ from unittest import TestCase
 
 from app.main.utils.database import assemble_sqlalchemy_url
 
+
 class TestDatabaseUtils(TestCase):
     '''
     A collection of unit tests for various database utilities
@@ -13,7 +14,7 @@ class TestDatabaseUtils(TestCase):
         '''
         # Define a config class similar to that in app/main/config/__init__.py with
         # fixed values so that the test doesn't fail when the config changes.
-        class PostgresDatabaseConfig:    
+        class PostgresDatabaseConfig:
             DB_TYPE = "sql"
             DB_HOST = "localhost"
             DB_DIALECT = "postgresql"
@@ -21,8 +22,8 @@ class TestDatabaseUtils(TestCase):
             DB_NAME = "test_database"
             DB_USER = "john.doe"
             DB_PASS = "changeMe"
-        
-        class SQLiteDatabaseConfig:    
+
+        class SQLiteDatabaseConfig:
             DB_TYPE = "sql"
             DB_HOST = "localhost"
             DB_DIALECT = "sqlite"
@@ -30,7 +31,7 @@ class TestDatabaseUtils(TestCase):
             DB_NAME = "test_database"
             DB_USER = "john.doe"
             DB_PASS = "changeMe"
-        
+
         # Define some expected results
         expected_sqlite_url = "sqlite:///test_database.db"
         expected_postgres_url = "postgresql://john.doe:changeMe@localhost:5432/test_database"

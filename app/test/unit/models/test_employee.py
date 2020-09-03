@@ -7,6 +7,7 @@ test_employee = Employee(
             last_name="Doe",
             email="john.doe@canada.ca",)
 
+
 class TestEmployeeModel(TestCase):
     '''
     Unit tests for the Employee database model.

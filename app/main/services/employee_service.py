@@ -1,5 +1,6 @@
 from ..models.employee import Employee
 
+
 def get_employee_by_id(user_id):
     '''
     Retreives a particular user by their user ID.
@@ -7,11 +8,12 @@ def get_employee_by_id(user_id):
     Args:
         user_id:
             An int that specifies the user_id.
-    
+
     Returns:
         An instance of the User model.
     '''
     return Employee.query.filter_by(id=user_id).first()
+
 
 def get_all_employees():
     ''' Gets all users in the users table. '''
