@@ -2,6 +2,17 @@
 
 A boilerplate for Python Flask Rest APIs.
 
+## Building for Production
+Run ```source app.sh -vf``` to create a ```version.json``` file that looks as follows:
+
+```json
+{
+    "version": "<version tag>",
+    "git_commit": "<commit hash>"
+}
+```
+The reason for including this file is to be able to trace back a particular version of a deployed application to its release and latest Git commit.
+
 ## Application initialization
 
 To initialize the application, run:

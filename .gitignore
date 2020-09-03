@@ -40,6 +40,7 @@ var/
 *.egg-info/
 .installed.cfg
 *.egg
+version.json
 
 # Installer logs
 pip-log.txt
